@@ -26,6 +26,7 @@ load_dotenv()
 
 class Assistant(Agent):
     def __init__(self,cht_ctx=None) -> None:
+        logging.info("Initializing Assistant with OpenAI LLM (LM Studio)...")
         super().__init__(
         instructions="You are a helpful voice AI assistant.",
         llm = openai.LLM(
@@ -44,6 +45,7 @@ class Assistant(Agent):
 
 
 async def entrypoint(ctx: agents.JobContext):
+    logging.info(f"Entrypoint called for job {ctx.job.id}. Waiting for connect...")
     async def shutdown_hook(chat_ctx: ChatContext, mem0: AsyncMemoryClient, memory_str: str):
         logging.info("Shutting down, saving chat context to memory...")
 
@@ -114,6 +116,7 @@ async def entrypoint(ctx: agents.JobContext):
         ),
     )
     await ctx.connect()
+    logging.info(f"Connected to room: {ctx.room.name}")
     # await speak_with_avatar(session, "Hello, I am your AI avatar. How can I help you today?")
     
 
