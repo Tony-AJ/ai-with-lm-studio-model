@@ -1,0 +1,8 @@
+/.dockerignore
+/.env
+/Dockerfile
+/KMS
+/__pycache__
+/apikeys.txt
+/livekit.toml
+/venv
